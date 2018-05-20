@@ -28,6 +28,7 @@ void stud_Route_Init()
 void stud_route_add(stud_route_msg *proute)// 添加一个新的表项
 {
     route_table t;
+    // 255.255.255.0, len = 24, 左移后计算出子网地址
     t.dest = (ntohl(proute->dest)) & (0xffffffff << (32 - htonl(proute->masklen)));
     t.nexthop = ntohl(proute->nexthop);
     map[t.dest] = t.nexthop;
